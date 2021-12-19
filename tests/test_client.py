@@ -52,6 +52,7 @@ class TestTahomaClient:
             ("setup_tahoma_oceania.json", 3),
             ("setup_tahoma_pro.json", 12),
             ("setup_hue_and_low_speed.json", 40),
+            ("setup_local.json", 1),
         ],
     )
     @pytest.mark.asyncio

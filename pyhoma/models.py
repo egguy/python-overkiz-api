@@ -35,44 +35,44 @@ def mask(input: str) -> str:
 
 @attr.s(auto_attribs=True, init=False, slots=True, kw_only=True)
 class Setup:
-    creation_time: str
-    last_update_time: str
+    creation_time: str | None = None
+    last_update_time: str | None = None
     id: str = attr.ib(repr=obfuscate_id, default=None)
-    location: Location
+    location: Location | None = None
     gateways: list[Gateway]
     devices: list[Device]
-    zones: list[Zone]
-    reseller_delegation_type: str
-    oid: str
-    root_place: Place
+    zones: list[Zone] | None = None
+    reseller_delegation_type: str | None = None
+    oid: str | None = None
+    root_place: Place | None = None
     features: list[Feature] | None = None
 
     def __init__(
         self,
         *,
-        creation_time: str,
-        last_update_time: str,
+        creation_time: str | None = None,
+        last_update_time: str | None = None,
         id: str = attr.ib(repr=obfuscate_id, default=None),
-        location: dict[str, Any],
+        location: dict[str, Any] | None = None,
         gateways: list[dict[str, Any]],
         devices: list[dict[str, Any]],
-        zones: list[dict[str, Any]],
-        reseller_delegation_type: str,
-        oid: str,
-        root_place: dict[str, Any],
+        zones: list[dict[str, Any]] | None = None,
+        reseller_delegation_type: str | None = None,
+        oid: str | None = None,
+        root_place: dict[str, Any] | None = None,
         features: list[dict[str, Any]] | None = None,
         **_: Any,
     ) -> None:
         self.id = id
         self.creation_time = creation_time
         self.last_update_time = last_update_time
-        self.location = Location(**location)
+        self.location = Location(**location) if location else None
         self.gateways = [Gateway(**g) for g in gateways]
         self.devices = [Device(**d) for d in devices]
-        self.zones = [Zone(**z) for z in zones]
+        self.zones = [Zone(**z) for z in zones] if zones else None
         self.reseller_delegation_type = reseller_delegation_type
         self.oid = oid
-        self.root_place = Place(**root_place)
+        self.root_place = Place(**root_place) if root_place else None
         self.features = [Feature(**f) for f in features] if features else None
 
 
